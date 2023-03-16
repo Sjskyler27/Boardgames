@@ -115,13 +115,13 @@ function rollDice() {
         if (backgroundColor === "rgb(0, 123, 255)") {
           document.body.style.backgroundColor = "#333";
           clearInterval(intervalId);
-        } else {
-          const rgb = backgroundColor.match(/\d+/g);
-          const newColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2] - 5})`;
-          document.body.style.backgroundColor = newColor;
-        }
+        }// else {
+        //   const rgb = backgroundColor.match(/\d+/g);
+        //   const newColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2] - 5})`;
+        //   document.body.style.backgroundColor = newColor;
+        // }
       }, 10);
-    }, 400);
+    }, 350);
   });
 
 

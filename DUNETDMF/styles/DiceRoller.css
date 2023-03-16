@@ -5,20 +5,19 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
     width: 100%;
   }
   
-  .dice-column {
+  /* .dice-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+  } */
   
   .dice {
-    width: 100px;
-    height: 100px;
+    width: 20em;
+    height: 20em;
     margin: 10px;
     background-repeat: no-repeat;
     background-size: contain;
@@ -32,11 +31,13 @@ body{
   }
 
   #reroll-button {
+    width: 5em;
+    height: 5em;
     margin: 20px auto;
     display: block;
-    font-size: 20px;
+    font-size: 64px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #02a01f;
     color: #fff;
     border: none;
     border-radius: 5px;
