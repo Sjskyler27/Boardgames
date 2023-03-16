@@ -38,17 +38,17 @@ for (let i = 1; i <= 7; i++) {
     //     diceArray.push(dice);
     // };
   
-    const dice = new Dice(`Dice${i}`, "./Dice/house/");
+    const dice = new Dice(`Dice${i}`, "./dice/house/");
     diceArray.push(dice);
     const diceElement = document.getElementById(`dice${i}`);
     if (i === 5){
-        dice.imagePath = "./Dice/kanley/"
+        dice.imagePath = "./dice/kanley/"
     }
     if (i === 6){
-        dice.imagePath = "./Dice/spice/"
+        dice.imagePath = "./dice/spice/"
     }
     if (i === 7){
-        dice.imagePath = "./Dice/region/"
+        dice.imagePath = "./dice/region/"
     }
     diceElement.style.backgroundImage = `url(${dice.imagePath}1.png)`;
     diceElement.addEventListener("click", () => {
