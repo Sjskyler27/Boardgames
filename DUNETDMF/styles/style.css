@@ -1,0 +1,13 @@
+body{
+    width: 1000px;
+    margin: auto;
+    justify-content: center;
+}
+p{
+    color: red;
+    
+}
+img{
+    margin-left: auto;
+    margin-right: auto;
+}
