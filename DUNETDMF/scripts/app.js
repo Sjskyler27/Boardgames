@@ -124,6 +124,23 @@ function rollDice() {
     }, 350);
   });
 
+  const unlockButton = document.getElementById("unlock-button");
+  unlockButton.addEventListener("click", () => {
+    for(let i = 0; i < 7; i++){
+        if(diceArray[i].locked){
+            diceArray[i].toggleLock();
+            console.log('unlock me ')
+
+            const diceElement = document.getElementById(`dice${i+1}`);
+            diceElement.classList.remove("locked");
+            const diceContainer = diceElement.parentElement;
+            diceContainer.classList.remove("locked");
+        }
+      
+    }
+  });
+  
+
 
   //other Ideas
 

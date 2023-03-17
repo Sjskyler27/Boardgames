@@ -43,4 +43,17 @@ body{
     border-radius: 5px;
     cursor: pointer;
   }
+  #unlock-button {
+    width: 5em;
+    height: 5em;
+    margin: 20px auto;
+    display: block;
+    font-size: 64px;
+    padding: 10px 20px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   
