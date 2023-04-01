@@ -76,32 +76,23 @@ unlockButton.addEventListener("click", () => {
 // set up an aarray to store the dice
 const diceArray = [];
 
-//grab the container 
-const diceContainer = document.getElementById('dicecontainer');
-
 // upon load add dice to the array using a loop
 for (let i = 1; i <= 7; i++) {  
     const dice = new Dice(`Dice${i}`, "./dice/house/");
+    diceArray.push(dice);
+    const diceElement = document.getElementById(`dice${i}`);
     if (i === 5){
-      dice.imagePath = "./dice/kanley/"
+        dice.imagePath = "./dice/kanley/"
     }
     if (i === 6){
-      dice.imagePath = "./dice/spice/"
+        dice.imagePath = "./dice/spice/"
     }
     if (i === 7){
-      dice.imagePath = "./dice/region/"
+        dice.imagePath = "./dice/region/"
     }
 
-    
-    // add the dice to the array
-    diceArray.push(dice);
-
-    // create the dice element and add it to the container
-    const diceElement = document.createElement('div');
-    diceElement.className = 'dice';
-    diceElement.id = `dice${i}`;
+    //change the background
     diceElement.style.backgroundImage = `url(${dice.imagePath}1.png)`;
-    diceContainer.appendChild(diceElement);
 
     //add a listen for click on each dice.
     diceElement.addEventListener("click", () => {
