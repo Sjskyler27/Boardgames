@@ -21,6 +21,10 @@ class Dice {
     }
   }
 
+  /*************
+   * FUNCTIONS
+   ******************/
+
   // function to add dice to the Array, takes a name and Number, 
   // number could be any realy as long as it is unique
   function addDice(type,num) {
@@ -57,6 +61,7 @@ class Dice {
           }
         });
 
+        //remove dice if desired
         function showOptionsForDice(dice) {
           // display options for the dice
           console.log('REMOVE:');
@@ -70,6 +75,29 @@ class Dice {
         }
   }
   
+  //get the names of the available files 
+  async function loadDiceFiles() {
+    try {
+      const response = await fetch('./dice/');
+      const html = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const folders = doc.querySelectorAll('a');
+      const diceFolders = [];
+      folders.forEach(folder => {
+        const folderName = folder.innerText;
+        if (!folderName.startsWith('.') && !folderName.endsWith('.png')) {
+          diceFolders.push(folderName);
+        }
+      });
+      console.log(diceFolders);
+      return diceFolders;
+    } catch (error) {
+      console.error('Error loading dice folders:', error);
+    }
+  }
+  
+
   //displays the new face for each dice in the array
   function rollDice() {
     diceArray.forEach((dice) => {
@@ -115,6 +143,21 @@ unlockButton.addEventListener("click", () => {
   });
 });
 
+//listen for the add button to add a dice
+const addButton = document.getElementById("add-button");
+addButton.addEventListener("click", async () => {
+  console.log('searching');
+  let dicetoadd =[];
+  files = await loadDiceFiles();
+  console.log(files);
+  const selectedDice = prompt(`Select a dice to add: ${files.join(', ')}`);
+  if (selectedDice) {
+    console.log('adding die');
+    addDice(selectedDice, 5);
+  }
+});
+
+
 
       
 /**************************
@@ -144,34 +187,6 @@ fetch('./dice/dune.json')
   .catch(error => {
     console.error('Error fetching dice data:', error);
   });
-
-
-
-// // add a listener for long-press on each dice
-// diceArray.forEach((dice) => {
-//   const diceElement = document.getElementById(dice.name.toLowerCase());
-//   let longPressTimeout;
-
-//   diceElement.addEventListener("mousedown", () => {
-//     longPressTimeout = setTimeout(() => {
-//       // show modal dialog to ask user if they want to remove the dice
-//       const removeDice = confirm("Remove this dice?");
-//       if (removeDice) {
-//         // remove the dice element and corresponding dice object from the array
-//         diceContainer.removeChild(diceElement);
-//         diceArray.splice(diceArray.indexOf(dice), 1);
-//       }
-//     }, 1000); // set the long-press timeout to 1 second
-//   });
-
-//   diceElement.addEventListener("mouseup", () => {
-//     clearTimeout(longPressTimeout);
-//   });
-
-//   diceElement.addEventListener("mouseleave", () => {
-//     clearTimeout(longPressTimeout);
-//   });
-// });
 
 
 
