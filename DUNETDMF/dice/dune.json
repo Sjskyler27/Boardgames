@@ -1,18 +1,18 @@
 [
     {
-      "path": "house",
+      "type": "house",
       "count": 4
     },
     {
-      "path": "kanley",
+      "type": "kanley",
       "count": 1
     },
     {
-      "path": "spice",
+      "type": "spice",
       "count": 1
     },
     {
-      "path": "region",
+      "type": "region",
       "count": 1
     }
   ]

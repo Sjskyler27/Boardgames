@@ -55,62 +55,59 @@ rerollButton.addEventListener("click", () => {
 //listen for the unlock button to unlock all the dice
 const unlockButton = document.getElementById("unlock-button");
 unlockButton.addEventListener("click", () => {
-  for(let i = 0; i < 7; i++){
-      if(diceArray[i].locked){
-          diceArray[i].toggleLock();
-          console.log('unlock me ')
-
-          const diceElement = document.getElementById(`dice${i+1}`);
-          diceElement.classList.remove("locked");
-          const diceContainer = diceElement.parentElement;
-          diceContainer.classList.remove("locked");
+  diceArray.forEach((dice) => {
+    if (dice.locked) {
+      dice.toggleLock();
+      const diceElement = document.getElementById(dice.name.toLowerCase());
+      diceElement.classList.remove("locked");
+          // const diceContainer = diceElement.parentElement;
+          // diceContainer.classList.remove("locked");
       }
     
-  }
+  });
 });
       
 /**************************
  * MAIN
  ***************************/
     
-// set up an aarray to store the dice
+// set up an array to store the dice
 const diceArray = [];
 
-//grab the container 
+// grab the container element
 const diceContainer = document.getElementById('dicecontainer');
 
-// upon load add dice to the array using a loop
-for (let i = 1; i <= 7; i++) {  
-    const dice = new Dice(`Dice${i}`, "./dice/house/");
-    if (i === 5){
-      dice.imagePath = "./dice/kanley/"
-    }
-    if (i === 6){
-      dice.imagePath = "./dice/spice/"
-    }
-    if (i === 7){
-      dice.imagePath = "./dice/region/"
-    }
+// fetch the dice data from a JSON file
+fetch('./dice/dune.json')
+  .then(response => response.json())
+  .then(data => {
+    // create dice elements based on the dice data
+    data.forEach(({ type, count }) => {
 
-    
-    // add the dice to the array
-    diceArray.push(dice);
+      for (let i = 1; i <= count; i++) {
+        const dice = new Dice(`${type}${i}`, `./dice/${type}/`);
+        diceArray.push(dice);
 
-    // create the dice element and add it to the container
-    const diceElement = document.createElement('div');
-    diceElement.className = 'dice';
-    diceElement.id = `dice${i}`;
-    diceElement.style.backgroundImage = `url(${dice.imagePath}1.png)`;
-    diceContainer.appendChild(diceElement);
+        // create the dice element and add it to the container
+        const diceElement = document.createElement('div');
+        diceElement.className = 'dice';
+        diceElement.id = `${type}${i}`;
+        diceElement.style.backgroundImage = `url(./dice/${type}/1.png)`;
+        diceContainer.appendChild(diceElement);
 
-    //add a listen for click on each dice.
-    diceElement.addEventListener("click", () => {
-    dice.toggleLock();
-    diceElement.classList.toggle("locked");
-    const diceContainer = diceElement.parentElement;
-    diceContainer.classList.toggle("locked", dice.locked);
+        // add a listener for click on each dice.
+        diceElement.addEventListener('click', () => {
+          dice.toggleLock();
+          diceElement.classList.toggle('locked');
+          // diceContainer.classList.toggle('locked', dice.locked);
+        });
+      }
+
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching dice data:', error);
   });
-}
 
 
 
