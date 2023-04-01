@@ -42,25 +42,32 @@ class Dice {
         });
 
 
-        // //listen for long press on a dice to display options
-        // const longPressDuration = 500; // duration in milliseconds
+        //listen for long press on a dice to display options
+        const longPressDuration = 500; // duration in milliseconds
 
-        // diceElement.addEventListener('touchstart', () => {
-        //   this.timeoutId = setTimeout(() => {
-        //     showOptionsForDice(dice);
-        //   }, longPressDuration);
-        // });
+        diceElement.addEventListener('touchstart', () => {
+          this.timeoutId = setTimeout(() => {
+            showOptionsForDice(dice);
+          }, longPressDuration);
+        });
 
-        // diceElement.addEventListener('touchend', () => {
-        //   if (this.timeoutId) {
-        //     clearTimeout(this.timeoutId);
-        //   }
-        // });
+        diceElement.addEventListener('touchend', () => {
+          if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+          }
+        });
 
-        // function showOptionsForDice(dice) {
-        //   // display options for the dice
-        //   console.log('options are:');
-        // }
+        function showOptionsForDice(dice) {
+          // display options for the dice
+          console.log('REMOVE:');
+          console.log(dice.name)
+          const removeDice = confirm("Remove this dice?");
+          if (removeDice) {
+            // remove the dice element and corresponding dice object from the array
+            diceContainer.removeChild(diceElement);
+            diceArray.splice(diceArray.indexOf(dice), 1);
+            }
+        }
   }
   
   //displays the new face for each dice in the array
@@ -140,31 +147,31 @@ fetch('./dice/dune.json')
 
 
 
-// add a listener for long-press on each dice
-diceArray.forEach((dice) => {
-  const diceElement = document.getElementById(dice.name.toLowerCase());
-  let longPressTimeout;
+// // add a listener for long-press on each dice
+// diceArray.forEach((dice) => {
+//   const diceElement = document.getElementById(dice.name.toLowerCase());
+//   let longPressTimeout;
 
-  diceElement.addEventListener("mousedown", () => {
-    longPressTimeout = setTimeout(() => {
-      // show modal dialog to ask user if they want to remove the dice
-      const removeDice = confirm("Remove this dice?");
-      if (removeDice) {
-        // remove the dice element and corresponding dice object from the array
-        diceContainer.removeChild(diceElement);
-        diceArray.splice(diceArray.indexOf(dice), 1);
-      }
-    }, 1000); // set the long-press timeout to 1 second
-  });
+//   diceElement.addEventListener("mousedown", () => {
+//     longPressTimeout = setTimeout(() => {
+//       // show modal dialog to ask user if they want to remove the dice
+//       const removeDice = confirm("Remove this dice?");
+//       if (removeDice) {
+//         // remove the dice element and corresponding dice object from the array
+//         diceContainer.removeChild(diceElement);
+//         diceArray.splice(diceArray.indexOf(dice), 1);
+//       }
+//     }, 1000); // set the long-press timeout to 1 second
+//   });
 
-  diceElement.addEventListener("mouseup", () => {
-    clearTimeout(longPressTimeout);
-  });
+//   diceElement.addEventListener("mouseup", () => {
+//     clearTimeout(longPressTimeout);
+//   });
 
-  diceElement.addEventListener("mouseleave", () => {
-    clearTimeout(longPressTimeout);
-  });
-});
+//   diceElement.addEventListener("mouseleave", () => {
+//     clearTimeout(longPressTimeout);
+//   });
+// });
 
 
 
