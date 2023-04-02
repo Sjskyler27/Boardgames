@@ -1,14 +1,48 @@
 body{
     width: 1000px;
     margin: auto;
-    justify-content: center;
 }
+header {
+    background-color: #87CEEB;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 30px;
+  }
+/* Define grid layout */
+#content {
+    display: grid;
+    width: 900px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-gap: 20px;
+    align-items: start;
+    justify-items: center;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: auto;
+    padding: 0;
+  }
+  
+  /* Style each section */
+  #content p {
+    grid-row: span 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: auto;
+  }
 
-p{
-    color: red;
+  footer {
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    background-color: darkred;
+    color: #fff;
+  }
+  footer a{
+    color: #fff;
     
-}
-img{
-    margin-left: auto;
-    margin-right: auto;
-}
+  }

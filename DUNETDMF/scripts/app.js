@@ -7,17 +7,22 @@ class Dice {
       this.imagePath = imagePath;
       this.description = description;
       this.locked = false;
+      this.faces = 6;
       this.currentFace = 1;
     }
     //assigns a random value
     roll() {
       if (!this.locked) {
-        this.currentFace = Math.floor(Math.random() * 6) + 1;
+        this.currentFace = Math.floor(Math.random() * this.faces) + 1;
       }
     }
     //allows you to lock the dice
     toggleLock() {
       this.locked = !this.locked;
+    }
+    
+    faces() {
+      
     }
   }
 
