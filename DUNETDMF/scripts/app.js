@@ -75,7 +75,7 @@ class Dice {
         }
   }
   
-  //get the names of the available files 
+  //get the names of the available files for dice to add
   async function loadDiceFiles() {
     try {
       const response = await fetch('./dice/');
@@ -86,8 +86,9 @@ class Dice {
       const diceFolders = [];
       folders.forEach(folder => {
         const folderName = folder.innerText;
-        if (!folderName.startsWith('.') && !folderName.endsWith('.png')) {
-          diceFolders.push(folderName);
+        if (!folderName.startsWith('.') && !folderName.endsWith('/') && folderName.includes('/')) {
+          console.log(folder.title);
+          diceFolders.push(folder.title);
         }
       });
       console.log(diceFolders);
@@ -147,13 +148,13 @@ unlockButton.addEventListener("click", () => {
 const addButton = document.getElementById("add-button");
 addButton.addEventListener("click", async () => {
   console.log('searching');
-  let dicetoadd =[];
+  //let dicetoadd =[];
+  //get a list of probable files
   files = await loadDiceFiles();
-  console.log(files);
-  const selectedDice = prompt(`Select a dice to add: ${files.join(', ')}`);
+  const selectedDice = prompt(`Type name of a dice to add: ${files.join(', ')}`);
   if (selectedDice) {
     console.log('adding die');
-    addDice(selectedDice, 5);
+    addDice(selectedDice, diceArray.length+1);
   }
 });
 
@@ -179,7 +180,8 @@ fetch('./dice/dune.json')
     data.forEach(({ type, count }) => {
 
       for (let i = 1; i <= count; i++) {
-        addDice(type,i)
+        //add the dice with a unique number
+        addDice(type,diceArray.length+1);
       }
 
     });
